@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
 
   ngOnInit() {
+    console.log('HomeComponent initialized');
     // Inicializa la lista de productos en el DOM
     this.initializeProductList();
   }
@@ -36,6 +37,10 @@ export class HomeComponent implements OnInit {
   initializeProductList() {
     // Obtiene el elemento con el id 'product-list' del DOM
     const productList = this.el.nativeElement.querySelector('#product-list');
+    
+    // Limpia el contenedor de productos antes de agregar nuevos productos
+    productList.innerHTML = '';
+
     if (productList) {
       // Itera sobre los productos y crea elementos HTML para cada uno
       this.products.forEach(product => {
@@ -81,7 +86,7 @@ export class HomeComponent implements OnInit {
           this.addToCart(product.id);
         });
 
-        // Anida los elementos y  los agrega al DOM
+        // Anida los elementos y los agrega al DOM
         this.renderer.appendChild(cardBody, cardTitle);
         this.renderer.appendChild(cardBody, cardText);
         this.renderer.appendChild(cardBody, button);
