@@ -1,5 +1,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- BARRA DE NAVEGACION -->
+<header
+class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
+  >
+    <a
+      href="index.html"
+      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+    >
+    <a href="index.html"><img src="assets/image/logo.png" alt="" /></a>
+       <span class="fs-4">Galgo Vinilos</span>
+    </a>
 
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <!-- <a href="app/components/login/login.component.html" class="nav-link active" aria-current="page">Login</a>        </li> -->
+        <a class="btn btn-outline-danger me-2" routerLink="/Login" role="button" (click)="login()">Login</a>
+      </ul>
+
+</header>
   
   <!-- CARRUSEL -->
       <div id="carouselExampleFade" class="carousel slide carousel-fade">

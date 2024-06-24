@@ -1,5 +1,7 @@
 // Importaciones necesarias
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 // Definición de la interfaz Product
 interface Product {
@@ -11,10 +13,20 @@ interface Product {
 
 @Component({
   selector: 'app-home',
+  standalone: true,
+  imports: [],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
+
 export class HomeComponent implements OnInit {
+  //Boton del login en el Header
+  login(): void {
+    this.router.navigate(['/login']);
+    
+  }
+
   // Arreglo de productos
   products: Product[] = [
     // Información de los vinilos
@@ -26,7 +38,7 @@ export class HomeComponent implements OnInit {
     { id: 6, name: 'Kraftwerk - Tour de France', price: 60000, image: 'assets/image/Vinilo-6.png' }
   ];
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(private renderer: Renderer2, private el: ElementRef,private router: Router) {}
 
   ngOnInit() {
     console.log('HomeComponent initialized');
