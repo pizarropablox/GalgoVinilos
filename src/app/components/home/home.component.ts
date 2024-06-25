@@ -27,6 +27,16 @@ export class HomeComponent implements OnInit {
     
   }
 
+register(): void {
+  this.router.navigate(['/register']);
+  
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('isLoggedIn');
+  }
+
+
   // Arreglo de productos
   products: Product[] = [
     // Información de los vinilos
