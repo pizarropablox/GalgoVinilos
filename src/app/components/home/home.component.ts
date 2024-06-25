@@ -2,7 +2,6 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 // Definición de la interfaz Product
 interface Product {
   id: number;
@@ -11,22 +10,17 @@ interface Product {
   image: string;
 }
 
+/**
+ * Componente HomeComponent que muestra una lista de productos y maneja la funcionalidad de agregar al carrito.
+ */
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [],
+  standalone: true, // Esta opción no es válida en Angular, ¿estás seguro de su uso aquí?
+  imports: [], // Importaciones de módulos, no se suelen definir en el componente directamente
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-
-
 export class HomeComponent implements OnInit {
-  //Boton del login en el Header
-  login(): void {
-    this.router.navigate(['/login']);
-    
-  }
-
   // Arreglo de productos
   products: Product[] = [
     // Información de los vinilos
@@ -38,18 +32,30 @@ export class HomeComponent implements OnInit {
     { id: 6, name: 'Kraftwerk - Tour de France', price: 60000, image: 'assets/image/Vinilo-6.png' }
   ];
 
-  constructor(private renderer: Renderer2, private el: ElementRef,private router: Router) {}
+  /**
+   * Constructor del componente HomeComponent.
+   * @param renderer Servicio para manipulación de elementos del DOM.
+   * @param el Referencia al elemento nativo del DOM.
+   * @param router Servicio de enrutamiento de Angular.
+   */
+  constructor(private renderer: Renderer2, private el: ElementRef, private router: Router) {}
 
+  /**
+   * Método que se ejecuta al inicializar el componente.
+   * Inicializa la lista de productos en el DOM.
+   */
   ngOnInit() {
     console.log('HomeComponent initialized');
-    // Inicializa la lista de productos en el DOM
     this.initializeProductList();
   }
 
+  /**
+   * Inicializa la lista de productos en el DOM.
+   * Crea elementos HTML para cada producto y los añade al DOM.
+   */
   initializeProductList() {
-    // Obtiene el elemento con el id 'product-list' del DOM
     const productList = this.el.nativeElement.querySelector('#product-list');
-    
+
     // Limpia el contenedor de productos antes de agregar nuevos productos
     productList.innerHTML = '';
 
@@ -61,17 +67,14 @@ export class HomeComponent implements OnInit {
         this.renderer.addClass(productDiv, 'col-sm-6');
         this.renderer.addClass(productDiv, 'mb-4');
 
-        // Crea una tarjeta para mostrar la información del producto
         const cardDiv = this.renderer.createElement('div');
         this.renderer.addClass(cardDiv, 'card');
 
-        // Agrega la imagen del producto
         const img = this.renderer.createElement('img');
         this.renderer.setAttribute(img, 'src', product.image);
         this.renderer.setAttribute(img, 'class', 'card-img-top');
         this.renderer.setAttribute(img, 'alt', product.name);
 
-        // Crea el cuerpo de la tarjeta con título, precio y botón
         const cardBody = this.renderer.createElement('div');
         this.renderer.addClass(cardBody, 'card-body');
 
@@ -85,7 +88,6 @@ export class HomeComponent implements OnInit {
         const text = this.renderer.createText(`$${product.price}`);
         this.renderer.appendChild(cardText, text);
 
-        // Crea el botón "Agregar al carrito" y asigna su funcionalidad
         const button = this.renderer.createElement('button');
         this.renderer.addClass(button, 'btn');
         this.renderer.addClass(button, 'btn-primary');
@@ -98,7 +100,6 @@ export class HomeComponent implements OnInit {
           this.addToCart(product.id);
         });
 
-        // Anida los elementos y los agrega al DOM
         this.renderer.appendChild(cardBody, cardTitle);
         this.renderer.appendChild(cardBody, cardText);
         this.renderer.appendChild(cardBody, button);
@@ -112,52 +113,58 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * Agrega un producto al carrito.
+   * @param productId ID del producto que se va a agregar al carrito.
+   */
   addToCart(productId: number) {
-    // Recupera el carrito almacenado en localStorage o crea uno vacío si no existe
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  
-    // Busca si el producto ya está en el carrito
+
     const existingProduct = cart.find((item: any) => item.id === productId);
-  
+
     if (existingProduct) {
-      // Si el producto ya existe, incrementa la cantidad en 1
       existingProduct.quantity += 1;
     } else {
-      // Si no existe, agrega un nuevo objeto al carrito con el id del producto y cantidad 1
       cart.push({ id: productId, quantity: 1 });
     }
-  
-    // Actualiza el carrito en localStorage
+
     localStorage.setItem('cart', JSON.stringify(cart));
-  
-    // Llama al método para actualizar el total del carrito
     this.updateCartTotal();
-  
-    // Muestra una alerta informando que el producto se ha agregado al carrito
     alert('Producto agregado al carrito');
   }
-  
+
+  /**
+   * Actualiza el total del carrito mostrado en la interfaz.
+   */
   updateCartTotal() {
-    // Recupera el carrito del almacenamiento local
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-  
     let total = 0;
-  
-    // Itera sobre los elementos del carrito
+
     cart.forEach((cartItem: any) => {
-      // Busca el producto correspondiente en la lista de productos
       const product = this.products.find(p => p.id === cartItem.id);
-  
+
       if (product) {
-        // Suma al total el precio del producto multiplicado por la cantidad en el carrito
         total += product.price * cartItem.quantity;
       }
     });
-  
-    // Busca el elemento con el id 'cart-total' en el DOM y actualiza su contenido
+
     const cartTotalElement = this.el.nativeElement.querySelector('#cart-total');
     if (cartTotalElement) {
       cartTotalElement.innerText = total.toString();
     }
+  }
+
+  /**
+   * Navega a la página de login.
+   */
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  /**
+   * Navega a la página de registro.
+   */
+  register(): void {
+    this.router.navigate(['/register']);
   }
 }
