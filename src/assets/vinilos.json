@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "name": "Bad Bunny - YALQMDLG",
+      "price": 250000,
+      "image": "assets/image/Vinilo-1.png"
+    },
+    {
+      "id": 3,
+      "name": "Trainspotting - Soundtrack",
+      "price": 30000,
+      "image": "assets/image/Vinilo-3.png"
+    },
+    {
+      "id": 4,
+      "name": "Beastie Boys - Check Your Head",
+      "price": 40000,
+      "image": "assets/image/Vinilo-4.png"
+    },
+    {
+      "id": 5,
+      "name": "Tiro de gracia - Ser Humano",
+      "price": 50000,
+      "image": "assets/image/Vinilo-5.png"
+    }
+  
+]
