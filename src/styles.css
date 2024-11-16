@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+    padding-top: 60px;
+}
+
+.barra {
+    padding: 10px 0;
+    background: #000000; /* Old browsers */
+    background: -moz-linear-gradient(left, #000000 0%, #000000 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, #000000 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #000000 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#741d51', endColorstr='#e44e52',GradientType=1 );/* IE6-9 */
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+.container {
+    max-width: 1200px;
+}
+.card {
+    margin-bottom: 20px;
+}
